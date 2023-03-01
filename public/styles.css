@@ -3,3 +3,6 @@ body {
     background-color: rgb(105, 73, 92);
     color: turquoise;
 }
+img {
+    height: 400px;
+}
