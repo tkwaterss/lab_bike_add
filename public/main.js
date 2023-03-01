@@ -19,16 +19,19 @@ let pokeName = document.querySelector('h1')
 //         image.src = `${response.data}`
 //     }).catch(err => console.log(err))
 // }
-
+let baseURL = "http://localhost:4001"
 let pokeURL = "https://pokeapi.co/api/v2/pokemon"
 
 const getRandomSprite = event => {
-    let randomId = Math.floor(Math.random()*100)
+    let randomId = Math.ceil(Math.random()*1008)
     axios.get(`${pokeURL}/${randomId}`)
     .then(response => {
         console.log(response.data)
+        let {name, id, order, height, weight} = response.data
+        let pokemon = [name, id, order, height, weight]
         image.src = response.data.sprites.front_default
         pokeName.textContent = response.data.species.name
+        axios.post(`${baseURL}`, pokemon)
     }).catch(err => console.log(err))
 }
 
