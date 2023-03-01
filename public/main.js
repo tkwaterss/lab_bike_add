@@ -1,5 +1,6 @@
 let image = document.querySelector('img')
 let main = document.querySelector('main')
+let pokeName = document.querySelector('h1')
 
 // image.addEventListener('click', (event) => {
 //     alert('CONGRADULATIONS YOU HAVE PURCHASED THIS BIKE FOR $10,000.00! EXPECT IT TO ARRIVE IN 30 YEARS! THANK YOU!!!')
@@ -20,13 +21,14 @@ let main = document.querySelector('main')
 // }
 
 let pokeURL = "https://pokeapi.co/api/v2/pokemon"
-let randomId = Math.floor(Math.random()*100)
 
 const getRandomSprite = event => {
+    let randomId = Math.floor(Math.random()*100)
     axios.get(`${pokeURL}/${randomId}`)
     .then(response => {
-        console.log(response.data.sprites.front_default)
+        console.log(response.data)
         image.src = response.data.sprites.front_default
+        pokeName.textContent = response.data.species.name
     }).catch(err => console.log(err))
 }
 
