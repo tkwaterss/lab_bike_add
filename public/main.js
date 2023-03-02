@@ -1,6 +1,8 @@
 let image = document.querySelector('img')
 let main = document.querySelector('main')
 let pokeName = document.querySelector('h1')
+let form = document.querySelector('form')
+let search = document.querySelector('#search')
 
 // image.addEventListener('click', (event) => {
 //     alert('CONGRADULATIONS YOU HAVE PURCHASED THIS BIKE FOR $10,000.00! EXPECT IT TO ARRIVE IN 30 YEARS! THANK YOU!!!')
@@ -30,11 +32,25 @@ const getRandomSprite = event => {
         let {name, id, order, height, weight} = response.data
         let pokemon = [name, id, order, height, weight]
         image.src = response.data.sprites.front_default
-        pokeName.textContent = response.data.species.name
+        pokeName.textContent = name
         axios.post(`${baseURL}`, pokemon)
     }).catch(err => console.log(err))
 }
 
+const searchPokemon = event => {
+    event.preventDefault();
+    let pokemon = search.value;
+    console.log(pokemon)
+    axios.get(`${pokeURL}/${pokemon}`)
+    .then(response => {
+        let {name, id, order, height, weight} = response.data
+        let pokeArr = [name, id, order, height, weight]
+        image.src = response.data.sprites.front_default
+        pokeName.textContent = name
+        axios.post(`${baseURL}`, pokeArr)
+    }).catch(err => console.log(err))
+}
 
 
+form.addEventListener('submit', searchPokemon)
 image.addEventListener('click', getRandomSprite)
