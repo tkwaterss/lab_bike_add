@@ -1,3 +1,6 @@
+//pm2 name "Bike"
+//ip - 18.221.63.3
+
 let image = document.querySelector('img')
 let main = document.querySelector('main')
 let pokeName = document.querySelector('h1')
@@ -21,6 +24,7 @@ let search = document.querySelector('#search')
 //         image.src = `${response.data}`
 //     }).catch(err => console.log(err))
 // }
+
 let baseURL = "http://localhost:4001"
 let pokeURL = "https://pokeapi.co/api/v2/pokemon"
 
@@ -33,7 +37,7 @@ const getRandomSprite = event => {
         let pokemon = [name, id, order, height, weight]
         image.src = response.data.sprites.front_default
         pokeName.textContent = name
-        axios.post(`${baseURL}`, pokemon)
+        axios.post(`/`, pokemon)
     }).catch(err => console.log(err))
 }
 
@@ -47,7 +51,7 @@ const searchPokemon = event => {
         let pokeArr = [name, id, order, height, weight]
         image.src = response.data.sprites.front_default
         pokeName.textContent = name
-        axios.post(`${baseURL}`, pokeArr)
+        axios.post(`/`, pokeArr)
     }).catch(err => console.log(err))
 }
 
